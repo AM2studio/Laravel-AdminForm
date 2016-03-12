@@ -34,7 +34,7 @@ class AdminFormServiceProvider extends ServiceProvider
         }
 
         $this->publishes([
-            __DIR__.'/../views/partials/form' => base_path(
+            __DIR__.'/views/partials/form' => base_path(
                 'resources/views/packages/am2studio/adminForm'
             )
         ], 'views');
