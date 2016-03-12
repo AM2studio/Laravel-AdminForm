@@ -28,7 +28,7 @@ class AdminFormServiceProvider extends ServiceProvider
             );
         } else {
             $this->loadViewsFrom(
-                __DIR__ . '/../views/partials/form',
+                __DIR__ . '/views/partials/form',
                 'adminForm'
             );
         }
