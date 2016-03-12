@@ -1,0 +1,44 @@
+{
+  "name": "am2studio/laravel-admin-from",
+  "type": "library",
+  "description": "Admin form helper",
+  "keywords": [
+    "AM2Studio",
+    "Admin form"
+  ],
+  "homepage": "https://github.com/AM2studio/Laravel-AdminForm",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Marko Šamec",
+      "email": "marko.samec@am2studio.hr",
+      "homepage": "http://am2studio.hr",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "illuminate/support": "~5.1",
+    "php" : ">=5.4.0",
+  },
+  "require-dev": {
+
+  },
+  "autoload": {
+    "psr-4": {
+      "AM2Studio\\LaravelAdminForm\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AM2Studio\\LaravelFinite\\Test\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
+}
