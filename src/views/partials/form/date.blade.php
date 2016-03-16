@@ -1,5 +1,5 @@
 <div class="card-form">
     <fieldset>
-        {!! Form::date($name, $value, $options) !!}
+        {!! Form::text($name, $value, $options) !!}
     </fieldset>
 </div>
