@@ -71,7 +71,7 @@ class AdminForm extends FormBuilder
 
     public function submitRow($label, $options = [])
     {
-        $element = $this->submit($label);
+        $element = $this->submit($label, $options);
 
         return View::make('adminForm::submitRow', compact('element', 'options'));
     }
