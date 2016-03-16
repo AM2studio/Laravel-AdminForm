@@ -1,8 +1,6 @@
-<tr @if(isset($options['rowClass'])) class="{{ $options['rowClass'] }} @endif">
-    <td @if(isset($options['labelClass'])) class="{{ $options['labelClass'] }} @endif">
-        {{ $label }}
-    </td>
-    <td @if(isset($options['labelClass'])) class="{{ $options['elementClass'] }} @endif">
+<div class="card-table-row">
+    <span class="card-table-cell @if(isset($options['labelClass'])) {{ $options['labelClass'] }} @else fixed25 @endif"></span>
+    <div class="card-table-cell">
         {!! $element !!}
-    </td>
-</tr>
+    </div>
+</div>
