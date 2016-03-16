@@ -51,6 +51,8 @@ class AdminForm extends FormBuilder
 
     public function date($name, $value = null, $options = [])
     {
+        $options = array_merge(['data-js' => 'datepicker'], $options);
+
         return View::make('adminForm::date', compact('name', 'value', 'options'));
     }
 
