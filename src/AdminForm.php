@@ -68,4 +68,11 @@ class AdminForm extends FormBuilder
     {
         return View::make('adminForm::row', compact('label', 'element', 'options'));
     }
+
+    public function submitRow($label, $options = [])
+    {
+        $element = $this->submit($label);
+
+        return View::make('adminForm::submitRow', compact('element', 'options'));
+    }
 }
