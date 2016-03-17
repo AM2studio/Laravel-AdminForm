@@ -52,6 +52,10 @@ class AdminForm extends FormBuilder
 
     public function checkbox($name, $value = 1, $checked = null, $options = [])
     {
+        if(!isset($options['id'])) {
+            $options['id'] = $name.'-'.uniqid();
+        }
+
         return View::make('adminForm::checkbox', compact('name', 'value', 'checked', 'options'));
     }
 
