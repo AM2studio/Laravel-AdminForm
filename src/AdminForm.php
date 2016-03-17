@@ -75,10 +75,10 @@ class AdminForm extends FormBuilder
     private function placeholder($options, $name)
     {
         if (!isset($options['placeholder'])) {
-            $attribute = explode('[', $name, 2)[0];
-            $attribute = preg_replace('/(?<!\ )[A-Z]/', ' $0', $attribute);
-            $attribute = strtolower($attribute);
+            $attribute = explode('[', $name);
+            $attribute = $attribute[count($attribute)-1];
             $attribute = str_replace('_', ' ', $attribute);
+            $attribute = str_replace(']', '', $attribute);
             $options = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => $attribute])]);
         }
 
