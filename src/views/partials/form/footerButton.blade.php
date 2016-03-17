@@ -1,1 +1,1 @@
-<button class="{{ $options['class'] }}">{{ $label }}</button>
+<button class="{{ $options['class'] }}">{!! $label !!}</button>
