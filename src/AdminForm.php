@@ -74,14 +74,22 @@ class AdminForm extends FormBuilder
 
     public function footerButtonRight($label, $options = [])
     {
-        $options['class'] .= ' right btn btn--secondary';
+        if(isset($options['class'])) {
+            $options['class'] .= ' right btn btn--secondary';
+        } else {
+            $options['class'] = 'right btn btn--secondary';
+        }
 
         return View::make('adminForm::footerButton', compact('label', 'options'));
     }
 
     public function footerButtonLeft($label, $options = [])
     {
-        $options['class'] .= ' left btn btn--secondary';
+        if(isset($options['class'])) {
+            $options['class'] .= ' right btn btn--secondary';
+        } else {
+            $options['class'] = 'right btn btn--secondary';
+        }
 
         return View::make('adminForm::footerButton', compact('label', 'options'));
     }
