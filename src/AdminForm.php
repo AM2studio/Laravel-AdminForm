@@ -9,9 +9,7 @@ class AdminForm extends FormBuilder
 {
     public function password($name, $options = [])
     {
-        if (!isset($options['placeholder'])) {
-            $options = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => str_replace('_', ' ', $name)])]);
-        }
+        $options = $this->placeholder($options, $name);
 
         return View::make('adminForm::password', compact('name', 'options'));
     }
@@ -23,18 +21,14 @@ class AdminForm extends FormBuilder
 
     public function text($name, $value = null, $options = [])
     {
-        if (!isset($options['placeholder'])) {
-            $options = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => str_replace('_', ' ', $name)])]);
-        }
+        $options = $this->placeholder($options, $name);
 
         return View::make('adminForm::text', compact('name', 'value', 'options'));
     }
 
     public function number($name, $value = null, $options = [])
     {
-        if (!isset($options['placeholder'])) {
-            $options = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => str_replace('_', ' ', $name)])]);
-        }
+        $options = $this->placeholder($options, $name);
 
         return View::make('adminForm::number', compact('name', 'value', 'options'));
     }
@@ -76,5 +70,18 @@ class AdminForm extends FormBuilder
         $element = $this->submit($label, $options);
 
         return View::make('adminForm::submitRow', compact('element', 'options'));
+    }
+
+    private function placeholder($options, $name)
+    {
+        if (!isset($options['placeholder'])) {
+            $attribute = explode('[', $name, 2)[0];
+            $attribute = preg_replace('/(?<!\ )[A-Z]/', ' $0', $attribute);
+            $attribute = strtolower($attribute);
+            $attribute = str_replace('_', ' ', $attribute);
+            $options = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => $attribute])]);
+        }
+
+        return $options;
     }
 }
