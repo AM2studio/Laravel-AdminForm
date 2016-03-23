@@ -1,7 +1,9 @@
 <div class="card-form">
     <fieldset class="checkbox-toggle">
-        {!! Form::hidden($name, 0) !!}
-        {!! Form::checkbox($name, $value, $checked, ['id' => $options['id']]) !!}
+        @if(!isset($options['ignore-hidden']))
+            {!! Form::hidden($name, 0) !!}
+        @endif
+        {!! Form::checkbox($name, $value, $checked, $options) !!}
         <label for="{{ $options['id'] }}"></label>
     </fieldset>
 </div>
