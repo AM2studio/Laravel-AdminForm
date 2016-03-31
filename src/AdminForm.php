@@ -40,6 +40,9 @@ class AdminForm extends FormBuilder
 
     public function select($name, $list = [], $selected = null, $options = [])
     {
+        if(!isset($options['data-js'])) {
+            $options['data-js'] = 'select';
+        }
         return View::make('adminForm::select', compact('name', 'list', 'selected', 'options'));
     }
 
