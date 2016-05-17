@@ -3,7 +3,11 @@
         @if(!isset($options['ignore-hidden']))
             {!! Form::hidden($name, 0) !!}
         @endif
-        {!! Form::checkbox($name, $value, $checked, $options) !!}
-        <label for="{{ $options['id'] }}"></label>
+        @if( isset($options['repeater']) )
+            {!! Form::checkbox($name, $value, $checked, array_merge($options, ['data-repeater-randomize'=>'id'] ) ) !!}
+        @else
+            {!! Form::checkbox($name, $value, $checked, $options) !!}
+        @endif
+        <label for="{{ $options['id'] }}" @if( isset($options['repeater']) ) data-repeater-randomize="for" @endif ></label>
     </fieldset>
 </div>
