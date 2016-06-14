@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class AdminFormServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -16,19 +15,17 @@ class AdminFormServiceProvider extends ServiceProvider
 
     /**
      * Perform post-registration booting of services.
-     *
-     * @return void
      */
     public function boot()
     {
         if (is_dir(base_path().'/resources/views/packages/am2studio/adminForm')) {
             $this->loadViewsFrom(
-                base_path() . '/resources/views/packages/am2studio/adminForm',
+                base_path().'/resources/views/packages/am2studio/adminForm',
                 'adminForm'
             );
         } else {
             $this->loadViewsFrom(
-                __DIR__ . '/views/partials/form',
+                __DIR__.'/views/partials/form',
                 'adminForm'
             );
         }
@@ -36,14 +33,12 @@ class AdminFormServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/views/partials/form' => base_path(
                 'resources/views/packages/am2studio/adminForm'
-            )
+            ),
         ], 'views');
     }
 
     /**
      * Register any package services.
-     *
-     * @return void
      */
     public function register()
     {

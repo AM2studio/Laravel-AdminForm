@@ -7,8 +7,11 @@ use View;
 
 class AdminForm extends FormBuilder
 {
+    private $name = null;
+
     public function password($name, $options = [])
     {
+        $options = $this->addIdToInput($name, $options);
         $options = $this->placeholder($options, $name);
 
         return View::make('adminForm::password', compact('name', 'options'));
@@ -16,11 +19,14 @@ class AdminForm extends FormBuilder
 
     public function radio($name, $value = null, $checked = null, $options = [])
     {
+        $options = $this->addIdToInput($name, $options);
+
         return View::make('adminForm::radio', compact('name', 'value', 'checked', 'options'));
     }
 
     public function text($name, $value = null, $options = [])
     {
+        $options = $this->addIdToInput($name, $options);
         $options = $this->placeholder($options, $name);
 
         return View::make('adminForm::text', compact('name', 'value', 'options'));
@@ -28,6 +34,7 @@ class AdminForm extends FormBuilder
 
     public function number($name, $value = null, $options = [])
     {
+        $options = $this->addIdToInput($name, $options);
         $options = $this->placeholder($options, $name);
 
         return View::make('adminForm::number', compact('name', 'value', 'options'));
@@ -35,6 +42,7 @@ class AdminForm extends FormBuilder
 
     public function currency($name, $value = null, $options = [])
     {
+        $options = $this->addIdToInput($name, $options);
         $options = $this->placeholder($options, $name);
 
         return View::make('adminForm::currency', compact('name', 'value', 'options'));
@@ -42,19 +50,24 @@ class AdminForm extends FormBuilder
 
     public function textarea($name, $value = null, $options = [])
     {
+        $options = $this->addIdToInput($name, $options);
+
         return View::make('adminForm::textarea', compact('name', 'value', 'options'));
     }
 
     public function select($name, $list = [], $selected = null, $options = [])
     {
-        if(!isset($options['data-js'])) {
+        $options = $this->addIdToInput($name, $options);
+        if (!isset($options['data-js'])) {
             $options['data-js'] = 'select';
         }
+
         return View::make('adminForm::select', compact('name', 'list', 'selected', 'options'));
     }
 
     public function date($name, $value = null, $options = [])
     {
+        $options = $this->addIdToInput($name, $options);
         $options = array_merge(['data-js' => 'datepicker'], $options);
 
         return View::make('adminForm::date', compact('name', 'value', 'options'));
@@ -62,7 +75,8 @@ class AdminForm extends FormBuilder
 
     public function checkbox($name, $value = 1, $checked = null, $options = [])
     {
-        if(!isset($options['id'])) {
+        $options = $this->addIdToInput($name, $options);
+        if (!isset($options['id'])) {
             $options['id'] = $name.'-'.uniqid();
         }
 
@@ -88,7 +102,7 @@ class AdminForm extends FormBuilder
 
     public function footerButtonRight($label, $options = [])
     {
-        if(isset($options['class'])) {
+        if (isset($options['class'])) {
             $options['class'] .= ' right btn';
         } else {
             $options['class'] = 'right btn';
@@ -99,7 +113,7 @@ class AdminForm extends FormBuilder
 
     public function footerButtonLeft($label, $options = [])
     {
-        if(isset($options['class'])) {
+        if (isset($options['class'])) {
             $options['class'] .= ' left btn';
         } else {
             $options['class'] = 'left btn';
@@ -112,10 +126,25 @@ class AdminForm extends FormBuilder
     {
         if (!isset($options['placeholder'])) {
             $attribute = explode('[', $name);
-            $attribute = $attribute[count($attribute)-1];
+            $attribute = $attribute[count($attribute) - 1];
             $attribute = str_replace('_', ' ', $attribute);
             $attribute = str_replace(']', '', $attribute);
             $options = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => $attribute])]);
+        }
+
+        return $options;
+    }
+
+    private function addIdToInput($name, $options)
+    {
+        if (isset($options['id'])) {
+            $options['id'] = $name.' '.trim($options['id']);
+        } else {
+            $options['id'] = $name;
+        }
+
+        if (isset($options['required'])) {
+            $options['required'] = 'required';
         }
 
         return $options;
