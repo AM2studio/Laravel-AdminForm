@@ -7,8 +7,6 @@ use View;
 
 class AdminForm extends FormBuilder
 {
-    private $name = null;
-
     public function password($name, $options = [])
     {
         $options = $this->addIdToInput($name, $options);
