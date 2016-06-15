@@ -43,6 +43,12 @@ class AdminForm extends FormBuilder
         $options = $this->addIdToInput($name, $options);
         $options = $this->placeholder($options, $name);
 
+        if (isset($options['class'])) {
+            $options['class'] = 'currency '.trim($options['class']);
+        } else {
+            $options['class'] = 'currency';
+        }
+
         return View::make('adminForm::currency', compact('name', 'value', 'options'));
     }
 
@@ -71,7 +77,7 @@ class AdminForm extends FormBuilder
         return View::make('adminForm::date', compact('name', 'value', 'options'));
     }
 
-	public function phone($name, $value = null, $options = [])
+    public function phone($name, $value = null, $options = [])
     {
         $options = $this->addIdToInput($name, $options);
         $options = array_merge(['data-js-mask-multi' => 'phone'], $options);

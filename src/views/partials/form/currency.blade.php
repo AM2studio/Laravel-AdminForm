@@ -2,7 +2,7 @@
     <fieldset>
     	<div class="input-group">
 			<div class="input-group__addon"><span class="fa fa-usd"></span></div>
-			{!! Form::number($name, $value, $options) !!}
+				{!! Form::text($name, $value, $options) !!}
 			<i class="fieldset-overlay" data-js="focus-on-field"></i>
 		</div>
     </fieldset>
