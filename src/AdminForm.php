@@ -71,6 +71,14 @@ class AdminForm extends FormBuilder
         return View::make('adminForm::date', compact('name', 'value', 'options'));
     }
 
+	public function phone($name, $value = null, $options = [])
+    {
+        $options = $this->addIdToInput($name, $options);
+        $options = array_merge(['data-js-mask-multi' => 'phone'], $options);
+
+        return View::make('adminForm::phone', compact('name', 'value', 'options'));
+    }
+
     public function checkbox($name, $value = 1, $checked = null, $options = [])
     {
         $options = $this->addIdToInput($name, $options);
@@ -127,7 +135,7 @@ class AdminForm extends FormBuilder
             $attribute = $attribute[count($attribute) - 1];
             $attribute = str_replace('_', ' ', $attribute);
             $attribute = str_replace(']', '', $attribute);
-            $options = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => $attribute])]);
+            $options   = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => $attribute])]);
         }
 
         return $options;
