@@ -95,9 +95,12 @@ class AdminForm extends FormBuilder
         return View::make('adminForm::checkbox', compact('name', 'value', 'checked', 'options'));
     }
 
-    public function submit($value = null, $options = [])
+    public function url($name, $value = null, $options = [])
     {
-        return View::make('adminForm::submit', compact('value', 'options'));
+        $options = $this->addIdToInput($name, $options);
+        $options['type'] = 'url';
+
+        return View::make('adminForm::text', compact('name', 'value', 'options'));
     }
 
     public function row($label, $element, $options = [])
@@ -105,33 +108,36 @@ class AdminForm extends FormBuilder
         return View::make('adminForm::row', compact('label', 'element', 'options'));
     }
 
-    public function submitRow($label, $options = [])
+    public function submit($value = null, $options = [])
     {
-        $element = $this->submit($label, $options);
+        $options = $this->addAjaxSubmitClass($options);
 
-        return View::make('adminForm::submitRow', compact('element', 'options'));
+        return View::make('adminForm::submit', compact('value', 'options'));
     }
 
-    public function footerButtonRight($label, $options = [])
+    public function footerButtonRight($value, $options = [])
     {
+        $options['class'] = isset($options['class']) ? $options['class'] : 'btn btn--primary ';
         if (isset($options['class'])) {
-            $options['class'] .= ' right btn';
+            $options['class'] .= ' right';
         } else {
-            $options['class'] = 'right btn';
+            $options['class'] = 'right';
         }
+        $options = $this->addAjaxSubmitClass($options);
 
-        return View::make('adminForm::footerButton', compact('label', 'options'));
+        return View::make('adminForm::submit', compact('value', 'options'));
     }
 
-    public function footerButtonLeft($label, $options = [])
+    public function footerButtonLeft($value, $options = [])
     {
         if (isset($options['class'])) {
-            $options['class'] .= ' left btn';
+            $options['class'] .= ' left';
         } else {
-            $options['class'] = 'left btn';
+            $options['class'] = 'left';
         }
+        $options = $this->addAjaxSubmitClass($options);
 
-        return View::make('adminForm::footerButton', compact('label', 'options'));
+        return View::make('adminForm::submit', compact('value', 'options'));
     }
 
     private function placeholder($options, $name)
@@ -141,7 +147,7 @@ class AdminForm extends FormBuilder
             $attribute = $attribute[count($attribute) - 1];
             $attribute = str_replace('_', ' ', $attribute);
             $attribute = str_replace(']', '', $attribute);
-            $options   = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => $attribute])]);
+            $options = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => $attribute])]);
         }
 
         return $options;
@@ -149,14 +155,26 @@ class AdminForm extends FormBuilder
 
     private function addIdToInput($name, $options)
     {
+        //add "id" atribute to input (equals as )name) attribute) so we can add "for" attribute to label which points to input "id"
         if (isset($options['id'])) {
             $options['id'] = $name.' '.trim($options['id']);
         } else {
             $options['id'] = $name;
         }
 
-        if (isset($options['required'])) {
-            $options['required'] = 'required';
+        return $options;
+    }
+
+    private function addAjaxSubmitClass($options)
+    {
+        if (isset($options['ajax-submit']) &&  $options['ajax-submit'] == 'false') {
+            //nothing 
+        } else {
+            if (isset($options['class'])) {
+                $options['class'] .= ' ajax-submit';
+            } else {
+                $options['class'] = 'ajax-submit';
+            }
         }
 
         return $options;
