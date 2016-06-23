@@ -72,7 +72,7 @@ class AdminForm extends FormBuilder
     public function date($name, $value = null, $options = [])
     {
         $options = $this->addIdToInput($name, $options);
-        $options = array_merge(['data-js' => 'datepicker'], $options);
+        $options = array_merge(['data-js-mask' => 'date'], $options);
 
         return View::make('adminForm::date', compact('name', 'value', 'options'));
     }
@@ -97,7 +97,7 @@ class AdminForm extends FormBuilder
 
     public function url($name, $value = null, $options = [])
     {
-        $options = $this->addIdToInput($name, $options);
+        $options         = $this->addIdToInput($name, $options);
         $options['type'] = 'url';
 
         return View::make('adminForm::text', compact('name', 'value', 'options'));
@@ -147,7 +147,7 @@ class AdminForm extends FormBuilder
             $attribute = $attribute[count($attribute) - 1];
             $attribute = str_replace('_', ' ', $attribute);
             $attribute = str_replace(']', '', $attribute);
-            $options = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => $attribute])]);
+            $options   = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => $attribute])]);
         }
 
         return $options;

@@ -1,8 +1,8 @@
 <?php
-	$optionsForm = [];
-	if(isset($options['form'])){
-		$optionsForm['form'] = $options['form'];
-	}
+    $optionsForm = [];
+    if (isset($options['form'])) {
+        $optionsForm['form'] = $options['form'];
+    }
 ?>
 <div class="card-form">
     <fieldset class="checkbox-toggle">
