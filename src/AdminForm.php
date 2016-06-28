@@ -51,6 +51,17 @@ class AdminForm extends FormBuilder
 
         return View::make('adminForm::currency', compact('name', 'value', 'options'));
     }
+	
+	public function percentage($name, $value = null, $options = [])
+    {
+        $options = $this->addIdToInput($name, $options);
+
+        if ( ! isset($options['placeholder'])) {
+            $options['placeholder'] = '0,00';
+        }
+
+        return View::make('adminForm::percentage', compact('name', 'value', 'options'));
+    }
 
     public function textarea($name, $value = null, $options = [])
     {
