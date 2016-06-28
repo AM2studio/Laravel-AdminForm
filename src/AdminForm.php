@@ -51,12 +51,12 @@ class AdminForm extends FormBuilder
 
         return View::make('adminForm::currency', compact('name', 'value', 'options'));
     }
-	
-	public function percentage($name, $value = null, $options = [])
+    
+    public function percentage($name, $value = null, $options = [])
     {
         $options = $this->addIdToInput($name, $options);
 
-        if ( ! isset($options['placeholder'])) {
+        if (! isset($options['placeholder'])) {
             $options['placeholder'] = '0,00';
         }
 
@@ -87,11 +87,14 @@ class AdminForm extends FormBuilder
 
         return View::make('adminForm::date', compact('name', 'value', 'options'));
     }
-
+	
     public function phone($name, $value = null, $options = [])
     {
         $options = $this->addIdToInput($name, $options);
-        $options = array_merge(['data-js-mask-multi' => 'phone'], $options);
+        $options = array_merge(['data-js-mask' => 'phone'], $options);
+		if (! isset($options['placeholder'])) {
+            $options['placeholder'] = '(XXX) XXX-XXXX';
+        }
 
         return View::make('adminForm::phone', compact('name', 'value', 'options'));
     }
