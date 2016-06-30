@@ -1,5 +1,5 @@
 <?php
-    preg_match_all('/name="([^"]+)"/', $element, $names);
+    preg_match_all('/id="([^"]+)"/', $element, $names);
     $name = count($names[1]) > 0 ? $names[1][0] : '';
 
     preg_match_all('/required="required"/', $element, $names);
