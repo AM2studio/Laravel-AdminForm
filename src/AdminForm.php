@@ -170,7 +170,7 @@ class AdminForm extends FormBuilder
     private function addIdToInput($name, $options)
     {
         //add "id" atribute to input (equals as )name) attribute) so we can add "for" attribute to label which points to input "id"
-        if ( ! isset($options['id'])) {
+        if (! isset($options['id'])) {
             $options['id'] = $name;
         }
 
@@ -181,6 +181,12 @@ class AdminForm extends FormBuilder
     {
         if (isset($options['ajax-submit']) &&  $options['ajax-submit'] == 'false') {
             //nothing 
+        }else if (isset($options['ajax-submit']) &&  $options['ajax-submit'] == 'true') {
+            if (isset($options['class'])) {
+                $options['class'] .= ' ajax-submit-force';
+            } else {
+                $options['class'] = 'ajax-submit-force';
+            }
         } else {
             if (isset($options['class'])) {
                 $options['class'] .= ' ajax-submit';
