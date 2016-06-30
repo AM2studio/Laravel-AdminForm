@@ -87,12 +87,12 @@ class AdminForm extends FormBuilder
 
         return View::make('adminForm::date', compact('name', 'value', 'options'));
     }
-	
+    
     public function phone($name, $value = null, $options = [])
     {
         $options = $this->addIdToInput($name, $options);
         $options = array_merge(['data-js-mask' => 'phone'], $options);
-		if (! isset($options['placeholder'])) {
+        if (! isset($options['placeholder'])) {
             $options['placeholder'] = '(XXX) XXX-XXXX';
         }
 
@@ -170,9 +170,7 @@ class AdminForm extends FormBuilder
     private function addIdToInput($name, $options)
     {
         //add "id" atribute to input (equals as )name) attribute) so we can add "for" attribute to label which points to input "id"
-        if (isset($options['id'])) {
-            $options['id'] = $name.' '.trim($options['id']);
-        } else {
+        if ( ! isset($options['id'])) {
             $options['id'] = $name;
         }
 
