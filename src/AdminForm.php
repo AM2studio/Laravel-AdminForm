@@ -171,7 +171,11 @@ class AdminForm extends FormBuilder
     {
         //add "id" atribute to input (equals as )name) attribute) so we can add "for" attribute to label which points to input "id"
         if (! isset($options['id'])) {
-            $options['id'] = $name;
+			if(strpos($name, '[]') !== false){
+				$options['id'] = str_replace('[]', '', $name) . '_' . uniqid();
+			}else{
+				$options['id'] = $name;
+			}
         }
 
         return $options;
@@ -181,7 +185,7 @@ class AdminForm extends FormBuilder
     {
         if (isset($options['ajax-submit']) &&  $options['ajax-submit'] == 'false') {
             //nothing 
-        }else if (isset($options['ajax-submit']) &&  $options['ajax-submit'] == 'true') {
+        } elseif (isset($options['ajax-submit']) &&  $options['ajax-submit'] == 'true') {
             if (isset($options['class'])) {
                 $options['class'] .= ' ajax-submit-force';
             } else {
