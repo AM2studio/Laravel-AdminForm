@@ -42,6 +42,7 @@ class AdminForm extends FormBuilder
     {
         $options = $this->addIdToInput($name, $options);
         $options = $this->placeholder($options, $name);
+		$options['pattern'] = "[0-9]*";
 
         if (isset($options['class'])) {
             $options['class'] = 'currency '.trim($options['class']);
@@ -171,11 +172,11 @@ class AdminForm extends FormBuilder
     {
         //add "id" atribute to input (equals as )name) attribute) so we can add "for" attribute to label which points to input "id"
         if (! isset($options['id'])) {
-			if(strpos($name, '[]') !== false){
-				$options['id'] = str_replace('[]', '', $name) . '_' . uniqid();
-			}else{
-				$options['id'] = $name;
-			}
+            if (strpos($name, '[]') !== false) {
+                $options['id'] = str_replace('[]', '', $name) . '_' . uniqid();
+            } else {
+                $options['id'] = $name;
+            }
         }
 
         return $options;
