@@ -40,9 +40,8 @@ class AdminForm extends FormBuilder
 
     public function currency($name, $value = null, $options = [])
     {
-        $options = $this->addIdToInput($name, $options);
-        $options = $this->placeholder($options, $name);
-		$options['pattern'] = "[0-9]*";
+        $options            = $this->addIdToInput($name, $options);
+        $options            = $this->placeholder($options, $name);
 
         if (isset($options['class'])) {
             $options['class'] = 'currency '.trim($options['class']);
