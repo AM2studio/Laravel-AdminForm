@@ -1,13 +1,7 @@
-<?php
-    $optionsForm = [];
-    if (isset($options['form'])) {
-        $optionsForm['form'] = $options['form'];
-    }
-?>
 <div class="card-form">
     <fieldset class="checkbox-toggle">
         @if(!isset($options['ignore-hidden']))
-            {!! Form::hidden($name, 0, $optionsForm) !!}
+			<input name="{{ $name }}" type="hidden" value="0" @if(isset($options['form'])) form="{{ $options['form'] }}" @endif ></input>
         @endif
         @if( isset($options['repeater']) )
             {!! Form::checkbox($name, $value, $checked, array_merge($options, ['data-repeater-randomize'=>'id'] ) ) !!}

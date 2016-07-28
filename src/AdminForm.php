@@ -40,8 +40,8 @@ class AdminForm extends FormBuilder
 
     public function currency($name, $value = null, $options = [])
     {
-        $options            = $this->addIdToInput($name, $options);
-        $options            = $this->placeholder($options, $name);
+        $options = $this->addIdToInput($name, $options);
+        $options = $this->placeholder($options, $name);
 
         if (isset($options['class'])) {
             $options['class'] = 'currency '.trim($options['class']);
@@ -51,12 +51,12 @@ class AdminForm extends FormBuilder
 
         return View::make('adminForm::currency', compact('name', 'value', 'options'));
     }
-    
+
     public function percentage($name, $value = null, $options = [])
     {
         $options = $this->addIdToInput($name, $options);
 
-        if (! isset($options['placeholder'])) {
+        if (!isset($options['placeholder'])) {
             $options['placeholder'] = '0,00';
         }
 
@@ -87,12 +87,12 @@ class AdminForm extends FormBuilder
 
         return View::make('adminForm::date', compact('name', 'value', 'options'));
     }
-    
+
     public function phone($name, $value = null, $options = [])
     {
         $options = $this->addIdToInput($name, $options);
         $options = array_merge(['data-js-mask' => 'phone'], $options);
-        if (! isset($options['placeholder'])) {
+        if (!isset($options['placeholder'])) {
             $options['placeholder'] = '(XXX) XXX-XXXX';
         }
 
@@ -111,7 +111,7 @@ class AdminForm extends FormBuilder
 
     public function url($name, $value = null, $options = [])
     {
-        $options         = $this->addIdToInput($name, $options);
+        $options = $this->addIdToInput($name, $options);
         $options['type'] = 'url';
 
         return View::make('adminForm::text', compact('name', 'value', 'options'));
@@ -161,7 +161,7 @@ class AdminForm extends FormBuilder
             $attribute = $attribute[count($attribute) - 1];
             $attribute = str_replace('_', ' ', $attribute);
             $attribute = str_replace(']', '', $attribute);
-            $options   = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => $attribute])]);
+            $options = array_merge($options, ['placeholder' => trans('ui.placeholder', ['attribute' => $attribute])]);
         }
 
         return $options;
@@ -170,9 +170,9 @@ class AdminForm extends FormBuilder
     private function addIdToInput($name, $options)
     {
         //add "id" atribute to input (equals as )name) attribute) so we can add "for" attribute to label which points to input "id"
-        if (! isset($options['id'])) {
+        if (!isset($options['id'])) {
             if (strpos($name, '[]') !== false) {
-                $options['id'] = str_replace('[]', '', $name) . '_' . uniqid();
+                $options['id'] = str_replace('[]', '', $name).'_'.uniqid();
             } else {
                 $options['id'] = $name;
             }
