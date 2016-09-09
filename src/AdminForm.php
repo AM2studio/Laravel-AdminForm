@@ -84,8 +84,17 @@ class AdminForm extends FormBuilder
     {
         $options = $this->addIdToInput($name, $options);
         $options = array_merge(['data-js-mask' => 'date'], $options);
+        $type = isset($options['type']) ? $options['type'] : 'date';
 
-        return View::make('adminForm::date', compact('name', 'value', 'options'));
+        return View::make('adminForm::date', compact('type', 'name', 'value', 'options'));
+    }
+
+    public function time($name, $value = null, $options = [])
+    {
+        $options = $this->addIdToInput($name, $options);
+        $type = isset($options['type']) ? $options['type'] : 'time';
+
+        return View::make('adminForm::time', compact('type', 'name', 'value', 'options'));
     }
 
     public function phone($name, $value = null, $options = [])
@@ -183,9 +192,9 @@ class AdminForm extends FormBuilder
 
     private function addAjaxSubmitClass($options)
     {
-        if (isset($options['ajax-submit']) &&  $options['ajax-submit'] == 'false') {
-            //nothing 
-        } elseif (isset($options['ajax-submit']) &&  $options['ajax-submit'] == 'true') {
+        if (isset($options['ajax-submit']) && $options['ajax-submit'] == 'false') {
+            //nothing
+        } elseif (isset($options['ajax-submit']) && $options['ajax-submit'] == 'true') {
             if (isset($options['class'])) {
                 $options['class'] .= ' ajax-submit-force';
             } else {
