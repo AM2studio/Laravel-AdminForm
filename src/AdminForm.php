@@ -72,6 +72,7 @@ class AdminForm extends FormBuilder
 
     public function select($name, $list = [], $selected = null, $options = [])
     {
+        $list = ['' => ''] + $list;
         $options = $this->addIdToInput($name, $options);
         if (!isset($options['data-js'])) {
             $options['data-js'] = 'select';
