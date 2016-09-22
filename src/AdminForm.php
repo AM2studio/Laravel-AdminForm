@@ -194,7 +194,7 @@ class AdminForm extends FormBuilder
     private function addAjaxSubmitClass($options)
     {
         if (isset($options['ajax-submit']) && $options['ajax-submit'] == 'false') {
-            //nothing
+            //nothing ...
         } elseif (isset($options['ajax-submit']) && $options['ajax-submit'] == 'true') {
             if (isset($options['class'])) {
                 $options['class'] .= ' ajax-submit-force';
