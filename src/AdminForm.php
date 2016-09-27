@@ -75,7 +75,9 @@ class AdminForm extends FormBuilder
         if (is_a($list, 'Illuminate\Support\Collection')) {
             $list = $list->toArray();
         }
-        $list = ['' => ''] + $list;
+        if (empty($options['multiple'])) {
+            $list = ['' => ''] + $list;
+        }
         $options = $this->addIdToInput($name, $options);
         if (!isset($options['data-js'])) {
             $options['data-js'] = 'select';
