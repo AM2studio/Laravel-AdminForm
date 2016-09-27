@@ -1,5 +1,9 @@
 <div class="card-form">
     <fieldset>
-        {!! Form::input($type, $name, $value, $options) !!}
+        @php
+            $valueConverted = $value == '' ? '' : $value->format('m/d/Y');
+        @endphp
+        {!! Form::hidden($name, $value, ['data-date-original' => true]) !!}
+        {!! Form::input($type,  $name . '_converted', $valueConverted, $options) !!}
     </fieldset>
 </div>

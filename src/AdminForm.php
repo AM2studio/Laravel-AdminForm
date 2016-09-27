@@ -89,8 +89,13 @@ class AdminForm extends FormBuilder
     public function date($name, $value = null, $options = [])
     {
         $options = $this->addIdToInput($name, $options);
-        $type    = isset($options['type']) ? $options['type'] : 'date';
-
+        $type    = isset($options['type']) ? $options['type'] : 'date-format';
+        if (isset($options['class'])) {
+            $options['class'] = 'datepicker '.trim($options['class']);
+        } else {
+            $options['class'] = 'datepicker';
+        }
+        
         return View::make('adminForm::date', compact('type', 'name', 'value', 'options'));
     }
 
