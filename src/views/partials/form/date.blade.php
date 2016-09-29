@@ -1,9 +1,14 @@
 <div class="card-form">
     <fieldset>
         @php
-            $valueConverted = $value == '' ? '' : $value->format('m/d/Y');
+            $value = Form::getValueAttribute($name, null);
+            if ($value instanceof Carbon\Carbon) {
+               $valueFormated = $value == '' ? '' : $value->format('m/d/Y');
+            }else{
+                $valueFormated = $value;
+            }
         @endphp
-        {!! Form::hidden($name, $value, ['data-date-original' => true]) !!}
-        {!! Form::input($type,  $name . '_converted', $valueConverted, $options) !!}
+        <input class="datepicker" name="{{$name}}_converted" type="date-format" value="{{ $valueFormated }}">
+        <input data-date-original="1" name="{{ $name }}" type="hidden" value="{{ $value }}">
     </fieldset>
 </div>
