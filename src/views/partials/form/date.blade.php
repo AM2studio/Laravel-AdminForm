@@ -1,7 +1,10 @@
 <div class="card-form">
     <fieldset>
         @php
-            $value = Form::getValueAttribute($name, null);
+            if(Form::getValueAttribute($name, null) !== null){
+                $value = Form::getValueAttribute($name, null);
+            }
+
             if ($value instanceof Carbon\Carbon) {
                $valueFormated = $value == '' ? '' : $value->format('m/d/Y');
             }else{
