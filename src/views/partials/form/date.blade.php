@@ -10,8 +10,13 @@
             }else{
                 $valueFormated = $value;
             }
+            
+            $placeholder = '';
+            if ( ! empty($options['placeholder'])) {
+                $placeholder = $options['placeholder'];
+            }
         @endphp
-        <input class="datepicker" name="{{$name}}_converted" type="date-format" value="{{ $valueFormated }}">
+        <input class="datepicker" name="{{$name}}_converted" type="date-format" value="{{ $valueFormated }}" placeholder="{{ $placeholder }}">
         <input data-date-original="1" name="{{ $name }}" type="hidden" value="{{ $value }}">
     </fieldset>
 </div>
