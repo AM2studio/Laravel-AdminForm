@@ -75,6 +75,20 @@ class AdminForm extends FormBuilder
         if (is_a($list, 'Illuminate\Support\Collection')) {
             $list = $list->toArray();
         }
+
+        if (isset($options['model_type'])  &&  isset($options['model_id'])  &&  isset($options['model_value'])) {
+            $modelKey   = $options['model_key']   ?? 'id';
+            $modelValue = $options['model_value'] ?? 'name';
+            $modelType  = $options['model_type'];
+            $modelId    = $options['model_id'];
+            $item       = $modelType::where([$modelKey => $modelId])->first();
+
+            if($item){
+                $list   += [$item->$modelKey => $item->$modelValue];
+                $selected = $item->$modelKey;
+            }
+        }
+
         if (empty($options['multiple'])) {
             $list = ['' => ''] + $list;
         }
