@@ -56,7 +56,7 @@ class AdminForm extends FormBuilder
     {
         $options = $this->addIdToInput($name, $options);
 
-        if (!isset($options['placeholder'])) {
+        if ( ! isset($options['placeholder'])) {
             $options['placeholder'] = '0,00';
         }
 
@@ -70,20 +70,21 @@ class AdminForm extends FormBuilder
         return View::make('adminForm::textarea', compact('name', 'value', 'options'));
     }
 
-    public function select($name, $list = [], $selected = null, $options = [])
+    //$name, $list = Array, $selected = NULL, array $selectAttributes = Array, array $optionsAttributes = Array
+    public function select($name, $list = [], $selected = null, array $selectAttributes = [], array $optionsAttributes = [])
     {
         if (is_a($list, 'Illuminate\Support\Collection')) {
             $list = $list->toArray();
         }
 
-        if (isset($options['model_type'])  &&  isset($options['model_id'])  &&  isset($options['model_value'])) {
-            $modelKey   = $options['model_key']   ?? 'id';
-            $modelValue = $options['model_value'] ?? 'name';
-            $modelType  = $options['model_type'];
-            $modelId    = $options['model_id'];
+        if (isset($selectAttributes['model_type'])  &&  isset($selectAttributes['model_id'])  &&  isset($selectAttributes['model_value'])) {
+            $modelKey   = $selectAttributes['model_key']   ?? 'id';
+            $modelValue = $selectAttributes['model_value'] ?? 'name';
+            $modelType  = $selectAttributes['model_type'];
+            $modelId    = $selectAttributes['model_id'];
             $item       = $modelType::where([$modelKey => $modelId])->first();
 
-            if($item){
+            if ($item) {
                 $list   += [$item->$modelKey => $item->$modelValue];
                 $selected = $item->$modelKey;
             }
@@ -92,9 +93,9 @@ class AdminForm extends FormBuilder
         if (empty($options['multiple'])) {
             $list = ['' => ''] + $list;
         }
-        $options = $this->addIdToInput($name, $options);
-        if (!isset($options['data-js'])) {
-            $options['data-js'] = 'select';
+        $options = $this->addIdToInput($name, $selectAttributes);
+        if ( ! isset($selectAttributes['data-js'])) {
+            $selectAttributes['data-js'] = 'select';
         }
 
         return View::make('adminForm::select', compact('name', 'list', 'selected', 'options'));
@@ -125,7 +126,7 @@ class AdminForm extends FormBuilder
     {
         $options = $this->addIdToInput($name, $options);
         $options = array_merge(['data-js-mask' => 'phone'], $options);
-        if (!isset($options['placeholder'])) {
+        if ( ! isset($options['placeholder'])) {
             $options['placeholder'] = '(XXX) XXX-XXXX';
         }
 
@@ -135,7 +136,7 @@ class AdminForm extends FormBuilder
     public function checkbox($name, $value = 1, $checked = null, $options = [])
     {
         $options = $this->addIdToInput($name, $options);
-        if (!isset($options['id'])) {
+        if ( ! isset($options['id'])) {
             $options['id'] = $name.'-'.uniqid();
         }
 
@@ -189,7 +190,7 @@ class AdminForm extends FormBuilder
 
     private function placeholder($options, $name)
     {
-        if (!isset($options['placeholder'])) {
+        if ( ! isset($options['placeholder'])) {
             $attribute = explode('[', $name);
             $attribute = $attribute[count($attribute) - 1];
             $attribute = str_replace('_', ' ', $attribute);
@@ -203,7 +204,7 @@ class AdminForm extends FormBuilder
     private function addIdToInput($name, $options)
     {
         //add "id" atribute to input (equals as )name) attribute) so we can add "for" attribute to label which points to input "id"
-        if (!isset($options['id'])) {
+        if ( ! isset($options['id'])) {
             if (strpos($name, '[]') !== false) {
                 $options['id'] = str_replace('[]', '', $name).'_'.uniqid();
             } else {

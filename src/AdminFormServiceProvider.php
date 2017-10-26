@@ -48,7 +48,7 @@ class AdminFormServiceProvider extends ServiceProvider
     public function registerAdminForm()
     {
         $this->app->bind('AdminForm', function ($app) {
-            return new AdminForm($app['html'], $app['url'], $app['view'], $app['session.store']->getToken());
+            return new AdminForm($app['html'], $app['url'], $app['view'], csrf_token());
         });
     }
 }
