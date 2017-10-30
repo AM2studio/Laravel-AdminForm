@@ -70,7 +70,6 @@ class AdminForm extends FormBuilder
         return View::make('adminForm::textarea', compact('name', 'value', 'options'));
     }
 
-    //$name, $list = Array, $selected = NULL, array $selectAttributes = Array, array $optionsAttributes = Array
     public function select($name, $list = [], $selected = null, array $selectAttributes = [], array $optionsAttributes = [])
     {
         if (is_a($list, 'Illuminate\Support\Collection')) {
@@ -90,15 +89,15 @@ class AdminForm extends FormBuilder
             }
         }
 
-        if (empty($options['multiple'])) {
+        if (empty($selectAttributes['multiple'])) {
             $list = ['' => ''] + $list;
         }
-        $options = $this->addIdToInput($name, $selectAttributes);
+        $selectAttributes = $this->addIdToInput($name, $selectAttributes);
         if ( ! isset($selectAttributes['data-js'])) {
             $selectAttributes['data-js'] = 'select';
         }
 
-        return View::make('adminForm::select', compact('name', 'list', 'selected', 'options'));
+        return View::make('adminForm::select', compact('name', 'list', 'selected', 'selectAttributes', 'optionsAttributes'));
     }
 
     public function date($name, $value = null, $options = [])
