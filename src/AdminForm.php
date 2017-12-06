@@ -186,6 +186,11 @@ class AdminForm extends FormBuilder
 
         return View::make('adminForm::submit', compact('value', 'options'));
     }
+    
+    public function phoneInt($name, $value = null, $options = [])
+    {
+        return $this->text($name, $value , $options);
+    }
 
     private function placeholder($options, $name)
     {
